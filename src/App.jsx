@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+ import React, { useState } from "react";
+ import ExpenseList from "./components/ExpenseList";
+ import ExpenseForm from "./components/ExpenseForm";
+ import SearchBar from "./components/SearchBar";
+ import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+ function App() {
+   const [expenses, setExpenses] = useState([
+     {
+       id: 1,
+       name: "Groceries",
+       amount: 50,
+       description: "Weekly food shopping",
+     },
+     {
+       id: 2,
+       name: "Rent",
+       amount: 1200,
+       description: "Monthly apartment rent",
+     },
+     {
+       id: 3,
+       name: "Movie Ticket",
+       amount: 15,
+       description: "Watching a new release",
+     },
+   ]);
+   const [searchTerm, setSearchTerm] = useState("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+   const handleAddExpense = (newExpense) => {
+     setExpenses([...expenses, { ...newExpense, id: Date.now() }]);
+   };
 
-export default App
+   const handleSearch = (term) => {
+     setSearchTerm(term);
+   };
+
+   const filteredExpenses = expenses.filter(
+     (expense) =>
+       expense.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+       expense.description.toLowerCase().includes(searchTerm.toLowerCase())
+   );
+
+   return (
+     <div className="app">
+       <h1>Expense Tracker</h1>
+       <SearchBar onSearch={handleSearch} />
+       <ExpenseForm onAddExpense={handleAddExpense} />
+       <ExpenseList expenses={filteredExpenses} />
+     </div>
+   );
+ }
+
+ export default App;
