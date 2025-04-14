@@ -28,4 +28,11 @@ The project is structured into the following components:
 
 4.  Open your browser and navigate to the address shown in the terminal (usually `http://localhost:3000`).
 
+### Credits:
+
+Created by Ali Mohammed Hanad
+
+#### Technologies used:
+
+css,React js
 

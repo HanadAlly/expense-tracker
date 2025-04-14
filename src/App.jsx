@@ -60,10 +60,10 @@ function App() {
 
   return (
     <div className="expense-tracker-container">
-      <header>
+      <div id ="header">
         <h1>Expense Tracker</h1>
-        <p>Tracking made easy for your personal spending.</p>
-      </header>
+        <p>Track your expenses easily and efficiently.</p>
+      </div>
 
       <div className="main-content">
         <aside className="add-expense-section">
