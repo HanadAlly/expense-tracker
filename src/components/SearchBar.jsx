@@ -1,18 +1,25 @@
- import React from "react";
-  import "../App.css";
+import React, { useState } from "react";
 
- function SearchBar({ onSearch }) {
-   return (
-     <div>
-       <label htmlFor="search">Search Expenses:</label>
-       <input
-         type="text"
-         id="search"
-         placeholder="Search by name or description"
-         onChange={(e) => onSearch(e.target.value)}
-       />
-     </div>
-   );
- }
+function SearchBar({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("");
 
- export default SearchBar;
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    onSearch(event.target.value);
+  };
+
+  return (
+    <div className="search-bar">
+      <label htmlFor="search">Search Expenses:</label>
+      <input
+        type="text"
+        id="search"
+        placeholder="Search by name or description"
+        value={searchTerm}
+        onChange={handleChange}
+      />
+    </div>
+  );
+}
+
+export default SearchBar;

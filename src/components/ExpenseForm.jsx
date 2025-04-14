@@ -1,59 +1,100 @@
- import React, { useState } from "react";
- import "../App.css";
+import React, { useState } from "react";
+import "../App.css";
 
- function ExpenseForm({ onAddExpense }) {
-   const [name, setName] = useState("");
-   const [amount, setAmount] = useState("");
-   const [description, setDescription] = useState("");
+function ExpenseForm({ onAddExpense }) {
+  const [newExpense, setNewExpense] = useState({
+    name: "",
+    description: "",
+    category: "",
+    amount: "",
+    date: "",
+  });
 
-   const handleSubmit = (e) => {
-     e.preventDefault();
-     if (name && amount) {
-       onAddExpense({ name, amount: parseFloat(amount), description });
-       setName("");
-       setAmount("");
-       setDescription("");
-     } else {
-       alert("Please enter both name and amount.");
-     }
-   };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewExpense((prevExpense) => ({
+      ...prevExpense,
+      [name]: value,
+    }));
+  };
 
-   return (
-     <div>
-       <h2>Add New Expense</h2>
-       <form onSubmit={handleSubmit}>
-         <div>
-           <label htmlFor="name">Name:</label>
-           <input
-             type="text"
-             id="name"
-             value={name}
-             onChange={(e) => setName(e.target.value)}
-             required
-           />
-         </div>
-         <div>
-           <label htmlFor="amount">Amount:</label>
-           <input
-             type="number"
-             id="amount"
-             value={amount}
-             onChange={(e) => setAmount(e.target.value)}
-             required
-           />
-         </div>
-         <div>
-           <label htmlFor="description">Description:</label>
-           <textarea
-             id="description"
-             value={description}
-             onChange={(e) => setDescription(e.target.value)}
-           />
-         </div>
-         <button type="submit">Add Expense</button>
-       </form>
-     </div>
-   );
- }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (newExpense.name && newExpense.amount && newExpense.date) {
+      onAddExpense(newExpense);
+      setNewExpense({
+        name: "",
+        description: "",
+        category: "",
+        amount: "",
+        date: "",
+      });
+    } else {
+      alert("Please fill in at least Name, Amount, and Date.");
+    }
+  };
 
- export default ExpenseForm;
+  return (
+    <div>
+      <h2>Add Expense</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Expense Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={newExpense.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={newExpense.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="category">Category:</label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            value={newExpense.category}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="amount">Amount:</label>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            value={newExpense.amount}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="date">Date:</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={newExpense.date}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <button type="submit">Add Expense</button>
+      </form>
+    </div>
+  );
+}
+
+export default ExpenseForm;
