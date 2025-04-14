@@ -26,7 +26,7 @@ The project is structured into the following components:
 3.  **Start the development server:**
     npm start
 
-4.  Open your browser and navigate to the address shown in the terminal (usually `http://localhost:3000`).
+4.  Open your browser and navigate to the address shown in the terminal (usually `http://localhost:5179`).
 
 ### Credits:
 
