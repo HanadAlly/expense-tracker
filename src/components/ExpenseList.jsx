@@ -3,7 +3,7 @@ import React from "react";
 function ExpenseList({ expenses }) {
   return (
     <div>
-      <h2>Expenses</h2>
+      
       <table>
         <thead>
           <tr>

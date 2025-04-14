@@ -10,11 +10,10 @@ function SearchBar({ onSearch }) {
 
   return (
     <div className="search-bar">
-      <label htmlFor="search">Search Expenses:</label>
       <input
         type="text"
         id="search"
-        placeholder="Search by name or description"
+        placeholder=" Search Expenses"
         value={searchTerm}
         onChange={handleChange}
       />
